@@ -1,0 +1,37 @@
+class Solution {
+public:
+    int evalRPN(vector<string>& s) {
+
+        stack<int>st;
+        for(auto x:s){
+            if(x=="+"||x=="-"||x=="*"||x=="/" ){
+                int op2=st.top();
+                st.pop();
+                int op1=st.top();
+                st.pop();
+                if(x=="+"){
+                    st.push(op1+op2);
+                }
+                if(x=="-"){
+                    st.push(op1-op2);
+                }
+                if(x=="*"){
+                    st.push(op1*op2);
+                }
+                if(x=="/"){
+                    st.push(op1/op2);
+                }
+            }
+            else{
+                stringstream ss(x); //breaking lines into wordss
+                int data;
+                ss>>data;
+                st.push(data);
+
+            }
+        }
+
+        return st.top();
+
+    }
+};
